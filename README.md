@@ -14,9 +14,3 @@ I engineered a full-stack web application that parses raw PDF transcripts and ge
 Prerequisite Enforcement: Implements a directed dependency graph for course sequences (e.g., `Physics I` must be completed before `Physics II`).
 Summer Logic: Automatically detects short summer semesters and bans heavy 16-week lab courses (Physics/Chemistry) from being scheduled during those terms.
 
-## How to Run Locally
-
-1. **Clone the Repo**
-   ```bash
-   git clone [https://github.com/YOUR_USERNAME/ut-transfer-optimizer.git](https://github.com/YOUR_USERNAME/ut-transfer-optimizer.git)
-   cd ut-transfer-optimizer
