@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UT Austin Transfer Optimizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header class="header">
+        <h1 class="brand-title">Longhorn Pathway</h1>
+        <p class="brand-subtitle">Automated Transfer Degree Planning</p>
+    </header>
+
+    <div class="container">
+        
+       <div class="upload-card">
+            <div class="upload-header">
+                <h2>Optimize Your Schedule</h2>
+                <p>Upload your Dallas College Program Report (PDF) to unlock your transfer plan.</p>
+            </div>
+            
+            <div class="upload-body">
+                <form action="/" method="post" enctype="multipart/form-data">
+                    <label class="drop-zone" id="drop-zone">
+                        <div class="drop-icon">
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                        </div>
+                        <span class="drop-text">Click to Upload or Drag PDF Here</span>
+                        <div class="drop-subtext">Supports .pdf files only</div>
+                        <input type="file" name="file" accept=".pdf" required onchange="showFileName(this)">
+                    </label>
+                    
+                    <div id="file-name"></div>
+                    
+                    <button type="submit" class="btn-primary">Generate My Degree Plan</button>
+                </form>
+            </div>
+        </div>
+
+        {% if schedule %}
+        <div class="results-area">
+            <div class="results-header">
+                <h2 style="color: var(--ut-gray); margin:0;">Your Optimized Timeline</h2>
+                <span style="background: #e5e7eb; padding: 5px 10px; border-radius: 4px; font-size: 0.9rem;">
+                    Target Grad: <strong>{{ schedule[-1].term }}</strong>
+                </span>
+            </div>
+
+            {% for semester in schedule %}
+            <div class="semester-card">
+                <div class="semester-title">
+                    {% if "FA" in semester.term %}🍂{% elif "SP" in semester.term %}🌱{% else %}☀️{% endif %}
+                    {{ semester.term }}
+                </div>
+                
+                <div class="course-list">
+                    {% for course in semester.courses %}
+                    <div class="course-item">
+                        {% if course.Category in stem_categories %}
+                            <span class="badge badge-stem">STEM</span>
+                        {% else %}
+                            <span class="badge badge-core">CORE</span>
+                        {% endif %}
+                        
+                        <span class="course-code">{{ course['Course Code'] }}</span>
+                        <span class="course-name">{{ course['Course Name'] }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+    </div>
+
+    <footer>
+        Built with Python, Flask, and Burnt Orange Pride.
+    </footer>
+
+    <script>
+        // Simple JS to show filename after selection
+        function showFileName(input) {
+            if(input.files && input.files[0]) {
+                document.getElementById('file-name').innerText = "✅ Ready to process: " + input.files[0].name;
+                document.getElementById('drop-zone').style.borderColor = "#BF5700";
+                document.getElementById('drop-zone').style.backgroundColor = "#fff8f0";
+            }
+        }
+
+        // Add dragover effect
+        const dropZone = document.getElementById('drop-zone');
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+    </script>
+</body>
+</html>

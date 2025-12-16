@@ -1,0 +1,12 @@
+# Ignore Virtual Env
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Ignore Uploads and PDFs
+uploads/
+*.pdf
+
+# Ignore System Files
+.DS_Store

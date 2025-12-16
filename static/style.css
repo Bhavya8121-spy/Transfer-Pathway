@@ -1,0 +1,256 @@
+/* static/style.css */
+:root {
+    --ut-orange: #BF5700;
+    --ut-gray: #333F48;
+    --ut-cement: #9cadb7;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-main: #2D2D2D;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* --- Header Section --- */
+.header {
+    background: white;
+    width: 100%;
+    padding: 20px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    text-align: center;
+    border-bottom: 4px solid var(--ut-orange);
+}
+
+.brand-title {
+    color: var(--ut-orange);
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brand-subtitle {
+    color: var(--ut-gray);
+    margin: 5px 0 0 0;
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+/* --- Main Container --- */
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin-top: 40px;
+    padding-bottom: 60px;
+}
+
+/* --- NEW Upload Area Design --- */
+.upload-card {
+    background: white;
+    border-radius: 16px;
+    padding: 0; /* Remove padding here to let header sit flush */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    text-align: center;
+    margin-bottom: 40px;
+    overflow: hidden; /* Keeps the border radius clean */
+    border: 1px solid #e5e7eb;
+}
+
+.upload-header {
+    background: linear-gradient(135deg, #BF5700 0%, #d66a0e 100%); /* UT Orange Gradient */
+    padding: 30px 20px;
+    color: white;
+}
+
+.upload-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.upload-header p {
+    margin: 8px 0 0 0;
+    opacity: 0.9;
+    font-size: 0.95rem;
+}
+
+.upload-body {
+    padding: 40px;
+}
+
+/* The Dashed Box */
+.drop-zone {
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 40px 20px;
+    cursor: pointer;
+    background: #f8fafc;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.drop-zone:hover, .drop-zone.dragover {
+    border-color: var(--ut-orange);
+    background: #fff5eb; /* Very light orange tint */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(191, 87, 0, 0.1);
+}
+
+.drop-icon {
+    font-size: 48px;
+    color: #94a3b8;
+    margin-bottom: 15px;
+    transition: color 0.3s;
+}
+
+.drop-zone:hover .drop-icon {
+    color: var(--ut-orange);
+}
+
+.drop-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 5px;
+}
+
+.drop-subtext {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+/* File Name Display */
+#file-name {
+    height: 24px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--ut-orange);
+    transition: opacity 0.3s;
+}
+
+/* The Button */
+.btn-primary {
+    background-color: var(--ut-gray); /* Dark gray for contrast */
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-primary:hover {
+    background-color: #000;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* --- Results Section --- */
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 10px;
+}
+
+.semester-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border-left: 5px solid var(--ut-gray);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.semester-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ut-gray);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* --- Course List --- */
+.course-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.course-item:last-child {
+    border-bottom: none;
+}
+
+/* --- Badges --- */
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-right: 15px;
+    min-width: 60px;
+    text-align: center;
+}
+
+.badge-stem {
+    background-color: rgba(191, 87, 0, 0.1); /* Light Orange */
+    color: var(--ut-orange);
+    border: 1px solid rgba(191, 87, 0, 0.2);
+}
+
+.badge-core {
+    background-color: rgba(51, 63, 72, 0.1); /* Light Gray */
+    color: var(--ut-gray);
+    border: 1px solid rgba(51, 63, 72, 0.2);
+}
+
+.course-code {
+    font-weight: 700;
+    margin-right: 10px;
+    min-width: 90px;
+}
+
+.course-name {
+    color: #4b5563;
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+    padding: 20px;
+    color: #9ca3af;
+    font-size: 0.9rem;
+}
