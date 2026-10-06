@@ -1,6 +1,6 @@
-# 🤘 Longhorn Transfer Pathway Optimizer
+# Transfer Pathway Optimizer
 
- **An automated degree planning engine for UT Austin transfer students.**  Built with Python, Flask, Pandas, and pdfplumber.
+ **An automated degree planning engine for transfer students.**  Built with Python, Flask, Pandas, and pdfplumber.
 
 # The Problem
 Transfer students often struggle to decipher "Program Reports" from community colleges. Course codes (e.g., `GOVT 2305`) are buried in unstructured text, and students frequently accidentally schedule prerequisites out of order or overload their semesters with too many STEM classes.
