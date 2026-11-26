@@ -14,3 +14,14 @@ I engineered a full-stack web application that parses raw PDF transcripts and ge
 Prerequisite Enforcement: Implements a directed dependency graph for course sequences (e.g., `Physics I` must be completed before `Physics II`).
 Summer Logic: Automatically detects short summer semesters and bans heavy 16-week lab courses (Physics/Chemistry) from being scheduled during those terms.
 
+
+## Run it locally
+
+This app parses PDFs on a Python server, so there's no hosted demo. A sample report (`Sample_Program_Report.pdf`) is included to try it.
+
+```bash
+pip install -r requirements.txt
+python app.py
+```
+
+Open http://127.0.0.1:5000 and upload the sample report.

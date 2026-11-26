@@ -9,36 +9,38 @@
 <body>
 
     <header class="header">
-        <h1 class="brand-title">Longhorn Pathway</h1>
-        <p class="brand-subtitle">Automated Transfer Degree Planning</p>
+        <div class="header-inner">
+            <h1 class="brand-title">Longhorn Pathway</h1>
+            <p class="brand-subtitle">Transfer degree planning</p>
+        </div>
     </header>
 
     <div class="container">
         
        <div class="upload-card">
             <div class="upload-header">
-                <h2>Optimize Your Schedule</h2>
-                <p>Upload your Dallas College Program Report (PDF) to unlock your transfer plan.</p>
+                <h2>Plan your transfer to UT Austin</h2>
+                <p>Upload your Dallas College Program Report and get a semester-by-semester plan.</p>
             </div>
             
             <div class="upload-body">
                 <form action="/" method="post" enctype="multipart/form-data">
                     <label class="drop-zone" id="drop-zone">
                         <div class="drop-icon">
-                            <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                 <polyline points="17 8 12 3 7 8"></polyline>
                                 <line x1="12" y1="3" x2="12" y2="15"></line>
                             </svg>
                         </div>
-                        <span class="drop-text">Click to Upload or Drag PDF Here</span>
-                        <div class="drop-subtext">Supports .pdf files only</div>
+                        <span class="drop-text">Choose a PDF or drag it here</span>
+                        <div class="drop-subtext">PDF only</div>
                         <input type="file" name="file" accept=".pdf" required onchange="showFileName(this)">
                     </label>
                     
                     <div id="file-name"></div>
                     
-                    <button type="submit" class="btn-primary">Generate My Degree Plan</button>
+                    <button type="submit" class="btn-primary">Generate degree plan</button>
                 </form>
             </div>
         </div>
@@ -46,30 +48,26 @@
         {% if schedule %}
         <div class="results-area">
             <div class="results-header">
-                <h2 style="color: var(--ut-gray); margin:0;">Your Optimized Timeline</h2>
-                <span style="background: #e5e7eb; padding: 5px 10px; border-radius: 4px; font-size: 0.9rem;">
-                    Target Grad: <strong>{{ schedule[-1].term }}</strong>
-                </span>
+                <h2>Your timeline</h2>
+                <span class="grad-target">Graduates <strong>{{ schedule[-1].term }}</strong></span>
             </div>
 
             {% for semester in schedule %}
             <div class="semester-card">
                 <div class="semester-title">
-                    {% if "FA" in semester.term %}🍂{% elif "SP" in semester.term %}🌱{% else %}☀️{% endif %}
                     {{ semester.term }}
                 </div>
                 
                 <div class="course-list">
                     {% for course in semester.courses %}
                     <div class="course-item">
+                        <span class="course-code">{{ course['Course Code'] }}</span>
+                        <span class="course-name">{{ course['Course Name'] }}</span>
                         {% if course.Category in stem_categories %}
                             <span class="badge badge-stem">STEM</span>
                         {% else %}
-                            <span class="badge badge-core">CORE</span>
+                            <span class="badge badge-core">Core</span>
                         {% endif %}
-                        
-                        <span class="course-code">{{ course['Course Code'] }}</span>
-                        <span class="course-name">{{ course['Course Name'] }}</span>
                     </div>
                     {% endfor %}
                 </div>
@@ -81,16 +79,19 @@
     </div>
 
     <footer>
-        Built with Python, Flask, and Burnt Orange Pride.
+        Built with Python and Flask.
     </footer>
 
     <script>
         // Simple JS to show filename after selection
         function showFileName(input) {
             if(input.files && input.files[0]) {
-                document.getElementById('file-name').innerText = "✅ Ready to process: " + input.files[0].name;
-                document.getElementById('drop-zone').style.borderColor = "#BF5700";
-                document.getElementById('drop-zone').style.backgroundColor = "#fff8f0";
+                const label = document.getElementById('file-name');
+                label.textContent = 'Selected: ';
+                const name = document.createElement('strong');
+                name.textContent = input.files[0].name;
+                label.appendChild(name);
+                document.getElementById('drop-zone').classList.add('has-file');
             }
         }
 
@@ -101,6 +102,9 @@
             dropZone.classList.add('dragover');
         });
         dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+        dropZone.addEventListener('drop', () => {
             dropZone.classList.remove('dragover');
         });
     </script>
